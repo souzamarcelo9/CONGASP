@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+    <h:form>
+ 
+     <h:panelGrid id="panelGrid-campos-form" columns="2" cellpadding="10">
+     
+     <p:outputLabel value="Contas" for="comboContas"/>
+	 	      <h:selectOneMenu style="width:325px" maxlength="70" id="comboContas" value="#{pagarDespesaController.contaModel.codConta}">
+	 	           <p:ajax listener="#{pagarDespesaController.handleChange}"  update="inputText-saldo"/>					
+  				   <f:selectItems value="#{consultarContaController.contas}" var="var" itemLabel="#{var.codConta}" itemValue="#{var.codConta}"></f:selectItems>
+			  </h:selectOneMenu>
+
+   <p:outputLabel value="Data Pagamento" for="dtPagamento" required="true"/>
+ 				        <p:calendar id="dtPagamento" value="#{pagarDespesaController.despesaModel.data_pagamento}" mode="inline" required="true">
+  				        <p:ajax process="dtPagamento" partialSubmit="true" event="change"/> 
+ 				        </p:calendar>
+ 				        
+    <p:outputLabel value="Saldo" />
+	<p:inputText id="inputText-saldo" 
+	             style="width:150px" 
+	             maxlength="80" 
+	             disabled="true"
+	             value="#{pagarDespesaController.contaModel.saldo}"/> 
+ 				        
+	<p:spacer/>
+	
+	<p:commandButton value="Pagar" 
+	            	 id="commandButton-pagar"
+			 		 icon="ui-icon-gear"
+	   				 actionListener="#{pagarDespesaController.Pagar}"							 
+			 		 oncomplete="PF('dialog-modal-pagar').hide();"
+		         	 update="form-consulta"/> 
+ 
+ 
+        <p:spacer/>
+	<p:messages showDetail="false" autoUpdate="true" closable="true" severity="error"/>
+ 
+     </h:panelGrid>                  
+ 
+    </h:form>
+ 
+</ui:composition>

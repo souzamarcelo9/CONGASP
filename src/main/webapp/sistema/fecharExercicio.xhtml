@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:format="http://congasp.com.br/LocalDateTimeConverter">
+ 
+<h:head>
+<script name="jquery/jquery.js" library="primefaces"></script>
+	
+</h:head>
+ 
+<ui:composition template="/template/layoutBase.xhtml">
+ 
+ 
+	<ui:define name="content">
+ 
+		   <p:tabView style="width:820px;height:450px;margin:auto;">
+	 		 
+	 		 <p:tab title="Fechamento contábil com cópia">
+ 
+	 		 	<h:form id="form-cadastro">	 	
+ 
+	 		 	<h:panelGrid id="panelGrid-texto" columns="1" cellpadding="10">
+                    
+                   <p:outputLabel value="Aqui você tem a opção de fechar a competência compensada,abrir um
+                   novo período e copiar todas as despesas da lista que tu já estás acostumado a trabalhar.Após
+                   essa operação as despesas contábeis não poderão ser mais alteradas." style="width:280px" colspan ="4"/>   
+               </h:panelGrid>    
+        		
+        		<h:panelGrid id="panelGrid-campos-form" columns="4" cellpadding="10">  	
+	                                           
+                      
+                      <p:outputLabel value="Mês" for="comboMes" required="true"/>
+                      <p:selectOneMenu id="comboMes" style="width:180px" maxlength="70" value="#{fechamentoController.despesaModel.mes}">
+                                    <f:selectItem itemLabel="Janeiro" itemValue="1"/>
+                                    <f:selectItem itemLabel="Fevereiro" itemValue="2"/>
+                                    <f:selectItem itemLabel="Março" itemValue="3"/>
+                                    <f:selectItem itemLabel="Abril" itemValue="4"/>
+                                    <f:selectItem itemLabel="Maio" itemValue="5"/>
+                                    <f:selectItem itemLabel="Junho" itemValue="6"/>
+                                    <f:selectItem itemLabel="Julho" itemValue="7"/>
+                                    <f:selectItem itemLabel="Agosto" itemValue="8"/>
+                                    <f:selectItem itemLabel="Setembro" itemValue="9"/>
+                                    <f:selectItem itemLabel="Outubro" itemValue="10"/>
+                                    <f:selectItem itemLabel="Novembro" itemValue="11"/>
+                                    <f:selectItem itemLabel="Dezembro" itemValue="12"/>
+                      </p:selectOneMenu>
+                      
+                      <p:outputLabel value="Ano" for="comboAno" required="true"/>
+                      <p:selectOneMenu id="comboAno" style="width:180px" maxlength="70" value="#{fechamentoController.despesaModel.exercicio}">
+                                    <f:selectItem itemLabel="2020" itemValue="2020"/>
+                                    <f:selectItem itemLabel="2021" itemValue="2021"/>
+                                    <f:selectItem itemLabel="2022" itemValue="2022"/>
+                                    <f:selectItem itemLabel="2023" itemValue="2023"/>
+                                    <f:selectItem itemLabel="2024" itemValue="2024"/>
+                      </p:selectOneMenu>
+                                           
+                      <h:selectBooleanCheckbox id="custoFixo" value="fechamentoController.custoFixo"  style="width:20px"/>Somente custo fixo na cópia  
+                      <h:selectBooleanCheckbox value="fechamentoController.despesaFutura"  style="width:20px"/>Inclui despesas futuras
+                     
+                        
+                        <p:outputLabel value="Nova Competência" for="dtComptNew" />
+ 				        <p:calendar id="dtComptNew" value="#{fechamentoController.novaCompetencia}" mode="inline" required="true">
+ 				        <p:ajax process="dtComptNew" partialSubmit="true" event="change"/> 
+ 				        </p:calendar>
+                        
+	            		<p:outputLabel value="Data do Fechamento" for="dtFechamento" required="true"/>
+ 				        <p:calendar id="dtFechamento" value="#{fechamentoController.despesaModel.data_limite}" mode="inline" required="true">
+ 				        <p:ajax process="dtFechamento" partialSubmit="true" event="change"/> 
+ 				        </p:calendar>
+	            		             
+	            		
+                      
+  	            		<p:spacer/> 
+                        
+                       
+	            		<p:commandButton value="Checar despesas abertas" 
+	            				 id="commandButton-check"
+	            				 style="width:200px"
+						 icon="ui-icon-gear"
+						 actionListener="#{fechamentoController.CheckOpenItems}"
+						 update="panelGrid-campos-form"/>
+        				
+	            		<p:commandButton value="Fechar com cópia" 
+	            				 id="commandButton-copy"
+	            				 style="width:170px"
+						 icon="ui-icon-gear"
+						 actionListener="#{fechamentoController.CloseCopying}"
+						 update="panelGrid-campos-form"/>
+	            		
+	            		<p:commandButton value="Fechar exercício somente" 
+	            				 id="commandButton-salvar"
+	            				 style="width:200px"
+						 icon="ui-icon-gear"
+						 actionListener="#{cadastrarDespesaController.SalvarDespesa}"
+						 update="panelGrid-campos-form"/>
+ 
+ 
+	 		 	</h:panelGrid>
+ 
+	 		 		<p:messages showDetail="true" autoUpdate="true" closable="true" severity="warn"/>
+	 		 		<p:messages autoUpdate="true" closable="true" severity="error"/>		
+		   			<p:messages showDetail="true" autoUpdate="true" closable="true" severity="info"/>
+ 
+	 		 		</h:form>
+ 
+	 			</p:tab>	 		
+ 
+	 		</p:tabView>
+            
+
+	</ui:define>
+ 
+</ui:composition>
+ 
+ 
+</html>

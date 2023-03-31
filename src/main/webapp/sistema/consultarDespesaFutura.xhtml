@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"	
+	xmlns:format="http://congasp.com.br/LocalDateTimeConverter">
+ 
+<h:head>
+</h:head>
+ 
+<ui:composition template="/template/layoutBase.xhtml">
+ 
+	<ui:define name="content">
+ 
+		<p:dialog header="Editar despesa futura" 
+				  id="dialog-modal-editar" 
+		   		  widgetVar="dialog-modal-editar" 
+		   		  modal="true" 
+		   		  height="400px"
+		   		  width="960px">
+ 
+    		 <ui:include src="/sistema/editarDespesaFutura.xhtml"/>
+ 
+ 
+		</p:dialog>
+        
+         
+		<h:form style="margin:auto;margin-left:2%;" id="form-consulta">
+          <h:panelGrid id="panelGrid-campos-form" columns="5" cellpadding="10"> 
+          <span style="font-style:italic;font-size:40px;color:gray">Lançamentos Futuros </span>
+           <p:outputLabel value="Despesas Futuras" style="font-style:italic;font-size:200px;"/>
+          </h:panelGrid>
+          
+			<p:dataTable id="dataTable-registros"
+						 var="despesa" 
+						 value="#{consultarDespesaFuturaController.despesas}" 
+						 rows="15"
+						 paginator="true"
+						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+                                                 {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="5,10,15"
+                                                 style="width:98%;">
+ 
+				        <p:column headerText="Código" style="width:30px;">
+            				<h:outputText value="#{despesa.idDespesa}" />
+        				</p:column>
+ 
+        				<p:column headerText="Produto" style="width:200px;">
+            				<h:outputText value="#{despesa.produtoModel.nomeProduto}" />
+        				</p:column>
+ 
+        				<p:column headerText="Valor" style="width:60px;">
+            				<h:outputText value="#{despesa.valor}" />
+        				</p:column>
+ 
+        				<p:column headerText="Data Vencimento" style="width:80px;">
+            				<h:outputText value="#{despesa.dataLimite}">            					
+            					<format:LocalDateTimeConverter pattern="dd/MM/yyyy HH:mm:ss"/>
+            				</h:outputText>
+        				 </p:column>
+ 
+        				 
+        				 <p:column headerText="Mes" style="width:30px;">
+            				<h:outputText value="#{despesa.mes}" />
+        				 </p:column>
+ 
+        				 <p:column headerText="Observacao" style="width:350px;">
+            				<h:outputText value="#{despesa.observacao}" />
+        				 </p:column>
+        				 
+        				  <p:column headerText="Data Despesa" style="width:80px;">
+            				<h:outputText value="#{despesa.dataDespesa}" />
+        				 </p:column>
+ 
+        				 <p:column headerText="Exercício" style="width:30px;">
+            				<h:outputText value="#{despesa.exercicio}" />
+        				 </p:column>
+ 
+        				 <p:column headerText="" style="width:25px;">
+ 
+        				       <p:commandButton icon="ui-icon-pencil" 
+        				    				    title="Editar Registro"                        					 
+                        					    ajax="true"                        					 
+                        					    actionListener="#{consultarDespesaFuturaController.Editar(despesa)}"
+                        					    oncomplete="PF('dialog-modal-editar').show();" 
+                        					    update="dialog-modal-editar"/>
+ 
+        				 </p:column>
+ 
+        				 <p:column headerText="" style="width:25px;">
+ 
+        				    <p:commandButton icon="ui-icon-trash" 
+        				    		     title="Excluir Registro"                        					 
+                        					 ajax="true"
+                        					 actionListener="#{consultarDespesaFuturaController.Excluir(despesa)}"
+                        					 update="@form" />
+ 
+        				 </p:column>
+ 
+			</p:dataTable>
+ 
+		</h:form>
+ 
+	</ui:define>
+ 
+</ui:composition>
+</html>

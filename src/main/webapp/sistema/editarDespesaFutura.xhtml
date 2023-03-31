@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:format="http://congasp.com.br/LocalDateTimeConverter">
+ 
+<h:form>
+ 
+ 
+	 		 	<h:panelGrid id="panelGrid-campos-form" columns="4" cellpadding="10">
+                      
+                      <p:outputLabel value="Mês" for="comboMes" required="true"/>
+                      <p:selectOneMenu id="comboMes" style="width:300px" maxlength="70" value="#{consultarDespesaFuturaController.despesaModel.mes}">
+                                    <f:selectItem itemLabel="Janeiro" itemValue="1"/>
+                                    <f:selectItem itemLabel="Fevereiro" itemValue="2"/>
+                                    <f:selectItem itemLabel="Março" itemValue="3"/>
+                                    <f:selectItem itemLabel="Abril" itemValue="4"/>
+                                    <f:selectItem itemLabel="Maio" itemValue="5"/>
+                                    <f:selectItem itemLabel="Junho" itemValue="6"/>
+                                    <f:selectItem itemLabel="Julho" itemValue="7"/>
+                                    <f:selectItem itemLabel="Agosto" itemValue="8"/>
+                                    <f:selectItem itemLabel="Setembro" itemValue="9"/>
+                                    <f:selectItem itemLabel="Outubro" itemValue="10"/>
+                                    <f:selectItem itemLabel="Novembro" itemValue="11"/>
+                                    <f:selectItem itemLabel="Dezembro" itemValue="12"/>
+                      </p:selectOneMenu>
+                      
+                      <p:outputLabel value="Ano" for="comboAno" required="true"/>
+                      <p:selectOneMenu id="comboAno" style="width:300px" maxlength="70" value="#{consultarDespesaFuturaController.despesaModel.exercicio}">
+                                    <f:selectItem itemLabel="2020" itemValue="2020"/>
+                                    <f:selectItem itemLabel="2021" itemValue="2021"/>
+                                    <f:selectItem itemLabel="2022" itemValue="2022"/>
+                                    <f:selectItem itemLabel="2023" itemValue="2023"/>
+                                    <f:selectItem itemLabel="2024" itemValue="2024"/>
+                      </p:selectOneMenu>
+                      
+                      
+                     
+                        
+                        
+                        <p:outputLabel value="Data Lançamento" for="dtlancamento" />
+ 				        <p:calendar id="dtlancamento" value="#{consultarDespesaFuturaController.despesaModel.dataDespesa}" mode="inline" required="true">
+ 				        <p:ajax process="dtlancamento" partialSubmit="true" event="change"/> 
+ 				        </p:calendar>
+                        
+	            		<p:outputLabel value="Data Vencimento" for="dtvencimento" required="true"/>
+ 				        <p:calendar id="dtvencimento" value="#{consultarDespesaFuturaController.despesaModel.dataLimite}" mode="inline" required="true">
+ 				        <p:ajax process="dtvencimento" partialSubmit="true" event="change"/> 
+ 				        </p:calendar>
+                        
+                        
+                         <p:outputLabel value="Produtos" for="comboProduto"/>
+	 		 	      		<h:selectOneMenu style="width:325px" maxlength="70" id="comboProduto" value="#{consultarDespesaFuturaController.despesaModel.idProduto}">					
+    				   		<f:selectItems value="#{consultarProdutoController.produtos}" var="var" itemLabel="#{var.nomeProduto}" itemValue="#{var.idProduto}"></f:selectItems>
+					  </h:selectOneMenu>
+ 				        
+ 				        <p:outputLabel for="inputText-valor" value="Valor:" />
+        				<p:inputText id="inputText-valor" 
+	            				  style="width:300px" maxlength="70" 
+	            				  value="#{consultarDespesaFuturaController.despesaModel.valor}"
+	            				  required="true"
+	            				  requiredMessage="O valor é de preenchimento obrigatório"/>         		
+ 				       
+						
+	            		<p:outputLabel value="Observação" for="inputText-obs"/>
+	            		<p:inputText id="inputText-obs" 
+	            			     style="width:380px" 
+	            			     maxlength="200" 
+	            			     value="#{consultarDespesaFuturaController.despesaModel.observacao}"
+	            			     required="true"
+	            		             requiredMessage="Obs é de preenchimento obrigatório"/>
+	            		             
+	            		
+                      
+	            		<p:spacer/>
+                        
+                        <p:outputLabel value=" " />
+        				
+	            		<p:outputLabel value=" " />
+	            		
+	            		<p:outputLabel value=" " />
+	            		<p:outputLabel value=" " />
+	            		
+	            		<p:commandButton value="Salvar Lançamento Futuro" 
+	            				 id="commandButton-salvar"
+						 icon="ui-icon-gear"
+						 actionListener="#{consultarDespesaFuturaController.AlterarRegistro}"
+						 update="panelGrid-campos-form"/>
+ 
+ 
+	 		 	</h:panelGrid>
+ 
+	 		 		<p:messages showDetail="true" autoUpdate="true" closable="true" severity="warn"/>
+	 		 		<p:messages autoUpdate="true" closable="true" severity="error"/>		
+		   			<p:messages showDetail="true" autoUpdate="true" closable="true" severity="info"/>
+ 
+	 		 		</h:form>
+	 		
+            
+ 
+ 
+</html>

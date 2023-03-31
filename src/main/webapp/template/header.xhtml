@@ -1,0 +1,113 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+	<h:form>
+        <p:megaMenu orientation="#{megaMenuView.orientation}" style="margin-top:20px">
+		    
+		    <p:menuitem value="Home" icon="ui-icon-home" url="home.xhtml" />
+		    
+		    <p:submenu label="Pessoas" icon="ui-icon-person">
+		        <p:column>
+		            <p:submenu label="Cadastrar">
+		                <p:menuitem value="Criar" url="cadastrarPessoa.xhtml" />
+<!-- 		                <p:menuitem value="TV.1.2" url="#" /> -->
+		            </p:submenu>
+		            <p:submenu label="Consultar">
+		                <p:menuitem value="Consulta" url="consultarPessoa.xhtml" />
+<!-- 		                <p:menuitem value="TV.2.2" url="#" /> -->
+<!-- 		                <p:menuitem value="TV.2.3" url="#" /> -->
+		            </p:submenu>
+		        </p:column>
+		 
+<!-- 		        <p:column> -->
+<!-- 		            <strong>Image</strong> -->
+<!-- 		            <p:graphicImage name="/demo/images/nature/nature1.jpg" width="200"/> -->
+<!-- 		        </p:column> -->
+		    </p:submenu>
+		 
+		    <p:submenu label="Produtos" icon="ui-icon-cart">
+		 
+		        <p:column>
+		            <p:submenu label="Cadastro">
+		                <p:menuitem value="Criar" url="cadastrarProduto.xhtml" />
+<!-- 		                <p:menuitem value="Sports.1.2" url="#" /> -->
+		            </p:submenu>
+		            <p:submenu label="Consulta">
+		                <p:menuitem value="Consultar" url="consultarProdutos.xhtml" />
+<!-- 		                <p:menuitem value="Sports.2.2" url="#" /> -->
+<!-- 		                <p:menuitem value="Sports.2.3" url="#" /> -->
+		            </p:submenu>
+		        </p:column>
+		 
+		       
+		    </p:submenu>
+		 
+		    <p:submenu label="Lançamento Contábil" icon="ui-icon-clipboard">
+		        <p:column>
+		            <p:submenu label="Lançar Despesa">
+		                <p:menuitem value="Criar" url="cadastrarDespesa.xhtml"/>
+<!-- 		                <p:menuitem value="Entertainment.1.2" url="#" /> -->
+		            </p:submenu>
+		            <p:submenu label="Consulta">
+		                <p:menuitem value="Consultar" url="consultarDespesas.xhtml" />
+		                
+		            </p:submenu>
+		            <p:submenu label="Despesas Futuras">
+		                <p:menuitem value="Consultar" url="consultarDespesaFutura.xhtml" />
+		                <p:menuitem value="Cadastrar" url="cadastrarDespesaFutura.xhtml" />
+		            </p:submenu>
+		            <p:submenu label="Fechamento">
+		                <p:menuitem value="Fechar com cópia" url="fecharExercicio.xhtml" />
+		                
+		            </p:submenu>
+		        </p:column>
+		 
+		    </p:submenu>
+		    
+		    <p:submenu label="Gráficos" icon="ui-icon-chart">
+		        <p:column>
+		            <p:submenu label="Pessoas">
+		                <p:menuitem value="Estatística" url="#" />
+		                <p:menuitem value="Gráfico Carroussel" url="#" />
+		            </p:submenu>
+		        </p:column>
+		    </p:submenu>
+		    
+		    <p:submenu label="Configurações" icon="ui-icon-chart">
+		        <p:column>
+		            <p:submenu label="Básicas">
+		                <p:menuitem value="Básicas" url="editarConfiguracao.xhtml" />
+<!-- 		                <p:menuitem value="Gráfico Carroussel" url="#" /> -->
+		            </p:submenu>
+		        </p:column>
+		    </p:submenu>
+		    
+		    
+		    <f:facet name="options">            
+             <p:commandButton value="Logout" icon="ui-icon-extlink" action="#{usuarioController.Logout}"/> 
+           </f:facet> 
+</p:megaMenu>
+<!-- 		<p:menubar> -->
+<!-- 			<p:menuitem value="Home" icon="ui-icon-home" url="home.xhtml" /> -->
+<!-- 			<p:menuitem value="Pessoas" icon="ui-icon-person" url="cadastrarPessoa.xhtml" /> -->
+<!-- 			<p:menuitem value="Consulta Pessoas" icon="ui-icon-person" url="consultarPessoa.xhtml" /> -->
+<!-- 			<p:menuitem value="Cadastro Produto" icon="ui-icon-cart" url="cadastrarProduto.xhtml" /> -->
+<!-- 			<p:menuitem value="Consulta Produtos" icon="ui-icon-cart" url="consultarProdutos.xhtml"/> -->
+<!-- 			<p:menuitem value="Lançamento Contábil" icon="ui-icon-clipboard" url="cadastrarDespesa.xhtml" /> -->
+<!-- 			<p:menuitem value="Partidas Abertas" icon="ui-icon-clipboard" url="consultarDespesas.xhtml" />   -->
+<!-- 			<p:menuitem value="Consulta por Carousel" icon="ui-icon-document" /> -->
+<!-- 			<p:menuitem value="Gráfico tipo Pessoa" icon="ui-icon-document" /> -->
+<!-- 			<p:menuitem value="Exportar XML Pessoa" icon="ui-icon-document" /> -->
+ 
+ 
+<!-- 		<f:facet name="options">             -->
+<!--             	        <p:commandButton value="Logout" icon="ui-icon-extlink" action="#{usuarioController.Logout}"/> -->
+<!--         	</f:facet> -->
+<!-- 		</p:menubar> -->
+ 
+	</h:form>
+ 
+</html>

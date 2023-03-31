@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"	
+	xmlns:format="http://congasp.com.br/LocalDateTimeConverter">
+ 
+<h:head>
+</h:head>
+
+<!--  <f:metadata> -->
+<!--     <f:viewAction action="#{consultarDespesaController.onload" /> -->
+<!-- </f:metadata> -->
+
+<ui:composition template="/template/layoutBase.xhtml">
+ 
+	<ui:define name="content">
+ 
+		<p:dialog header="Editar lançamento" 
+				  id="dialog-modal-editar" 
+		   		  widgetVar="dialog-modal-editar" 
+		   		  modal="true" 
+		   		  height="400px"
+		   		  width="920px">
+ 
+    		 <ui:include src="/sistema/editarDespesa.xhtml"/>
+ 
+		</p:dialog>
+		
+		<p:dialog header="Pagar Despesa" 
+				  id="dialog-modal-pagar" 
+		   		  widgetVar="dialog-modal-pagar" 
+		   		  modal="true" 
+		   		  height="350px"
+		   		  width="460px">
+ 
+    		 <ui:include src="/sistema/pagarDespesa.xhtml"/>
+ 
+		</p:dialog>
+		
+		
+		<h:form style="margin:auto;margin-left:2%;" id="form-consulta">
+          
+         <h:panelGrid id="panelGrid-campos-head" columns="4" cellpadding="10">  
+             
+           <div style="background-image: linear-gradient(to right, #00b09b, #96c93d);height:100px;width:100%;">
+           <br/>
+              <span style="font-style:italic;font-size:40px;color:white;width:100%;margin-left: 15px">Lançamento Contábil - Despesas Mensais
+              em R$  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+            </span>
+           </div>    	
+              <!--  <p:outputLabel value="Despesas Mensais" style="font-style:italic;font-size:200px;"/>-->	                                   
+               
+               <p:outputLabel value=" "/>	 
+          </h:panelGrid>
+          <h:panelGrid id="panelGrid-campos-form" columns="5" cellpadding="10">     
+             <p:outputLabel value="Mês" for="comboMes" required="true"/>
+                      <p:selectOneMenu id="comboMes" style="width:200px" maxlength="70" value="#{consultarDespesaController.despesaModel.mes}">
+                                    <f:selectItem itemLabel="Janeiro" itemValue="1"/>
+                                    <f:selectItem itemLabel="Fevereiro" itemValue="2"/>
+                                    <f:selectItem itemLabel="Março" itemValue="3"/>
+                                    <f:selectItem itemLabel="Abril" itemValue="4"/>
+                                    <f:selectItem itemLabel="Maio" itemValue="5"/>
+                                    <f:selectItem itemLabel="Junho" itemValue="6"/>
+                                    <f:selectItem itemLabel="Julho" itemValue="7"/>
+                                    <f:selectItem itemLabel="Agosto" itemValue="8"/>
+                                    <f:selectItem itemLabel="Setembro" itemValue="9"/>
+                                    <f:selectItem itemLabel="Outubro" itemValue="10"/>
+                                    <f:selectItem itemLabel="Novembro" itemValue="11"/>
+                                    <f:selectItem itemLabel="Dezembro" itemValue="12"/>
+                      </p:selectOneMenu>
+                      
+                    
+                      <p:outputLabel value="Ano" for="comboAno" required="true"/>
+                      <p:selectOneMenu id="comboAno" style="width:200px" maxlength="70" value="#{consultarDespesaController.despesaModel.selectedOption}">
+<!--                                     <f:selectItem itemLabel="2020" itemValue="2020"/> -->
+<!--                                     <f:selectItem itemLabel="2021" itemValue="2021"/> -->
+<!--                                     <f:selectItem itemLabel="2022" itemValue="2022"/> -->
+<!--                                     <f:selectItem itemLabel="2023" itemValue="2023"/> 
+                                    <f:selectItem itemLabel="2024" itemValue="2024"/>-->
+                                    <f:selectItem itemLabel="Selecione" itemValue=""/>
+                                     <f:selectItems value="#{consultarDespesaController.anos}"/>
+                      </p:selectOneMenu>
+                      
+                       <h:commandLink>
+		                <p:graphicImage value="/resources/imagens/ms-excel.png" width="30px" height="30px" />
+		                <p:dataExporter type="xls" postProcessor="#{manager.postProcessXLS}"
+                    	target="dataTable-registros" fileName="myexcel" />
+            		   </h:commandLink>
+                       
+            	       
+            	       <p:outputLabel value="Observação" for="inputText-obs"/>
+	            		<p:inputText id="inputText-obs" 
+	            			     style="width:220px" 
+	            			     maxlength="200" 
+	            			     value="#{consultarDespesaController.despesaModel.observacao}"
+	            			     required="false"/>
+	            	    
+	            	     <p:outputLabel for="inputText-valor" value="Valor:" />
+        				<p:inputText id="inputText-valor" 
+	            				  style="width:220px" maxlength="70" 
+	            				  value="#{consultarDespesaController.despesaModel.valor}"
+	            				  required="false"/> 
+	            				  
+	            	    <p:column headerText="" style="width:25px;">
+ 
+        				    <p:commandButton icon=" ui-icon-script" 
+        				    		     title="Consultar"                        					 
+                        					 ajax="false"
+                        					 actionListener="#{consultarDespesaController.List(consultarDespesaController.despesaModel)}" 
+                        					 update ="dataTable-registros"></p:commandButton>
+
+                       </p:column>
+                                            
+	            				  
+<!-- 	            	   <p:outputLabel value="Saldo" required="true" id="lblSaldo"/>	 -->
+<!--             	       <p:outputLabel value="#{consultarDespesaController.saldoTotal}" />  -->
+             
+<!--              <p:column headerText="" style="width:20px;height:30px"> -->
+<!-- 				 </p:column> -->
+            	
+        	
+          </h:panelGrid>
+          
+          
+			<p:dataTable id="dataTable-registros"
+						 var="despesa" 
+						 value="#{consultarDespesaController.despesas}" 
+						 rows="15"
+						 paginator="true"
+						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} 
+                                                 {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                                 rowsPerPageTemplate="5,10,15"
+                                                 style="width:98%;">
+ 
+				        <p:column headerText="Código" style="width:20px;">
+            				<h:outputText value="#{despesa.codigo}" />
+        				</p:column>
+ 
+        				<p:column headerText="Cod.Produto" style="width:15px;">
+            				<h:outputText value="#{despesa.produtoModel.idProduto}" />
+        				</p:column>
+                        
+                        <p:column headerText="Deb.Aut." style="width:15px;">
+            				<h:outputText value="#{despesa.debito_automatico}">            					
+            					
+            				</h:outputText>
+        				 </p:column>
+                        
+        				<p:column headerText="Descrição" style="width:200px;">
+            				<h:outputText value="#{despesa.produtoModel.nomeProduto}" />
+        				</p:column>
+
+        				 
+        				 <p:column headerText="Valor" style="width:40px;">
+            				<h:outputText value="#{despesa.valor}" />
+        				 </p:column>
+ 
+        				 <p:column headerText="Dt.Vencimento" style="width:70px;">
+            				<h:outputText value="#{despesa.data_limite}" />
+            				 <format:LocalDateTimeConverter pattern="dd/MM/yyyy HH:mm:ss"/>
+        				 </p:column>
+ 
+        				 <p:column headerText="Dt.Pagamento" style="width:70px;">
+            				<h:outputText value="#{despesa.data_pagamento}" />
+            				<format:LocalDateTimeConverter pattern="dd/MM/yyyy HH:mm:ss"/>
+        				 </p:column>
+ 
+        				 <p:column headerText="Data Despesa" style="width:70px;">
+            				<h:outputText value="#{despesa.data_despesa}" />
+            				<format:LocalDateTimeConverter pattern="dd/MM/yyyy HH:mm:ss"/>
+        				 </p:column>
+        				 
+        				 <p:column headerText="Observação" style="width:300px;">
+            				<h:outputText value="#{despesa.observacao}" />
+            				
+        				 </p:column>
+        				 
+        				  <p:column headerText="Mes" style="width:30px;">
+            				<h:outputText value="#{despesa.mes}" />
+            				
+        				 </p:column>
+        				 
+        				 <p:column headerText="Exercício" style="width:30px;">
+            				<h:outputText value="#{despesa.exercicio}" />
+            				
+        				 </p:column>
+ 
+        				 <p:column headerText="Editar" style="width:25px;">
+ 
+        				       <p:commandButton icon="ui-icon-pencil" 
+        				    				    title="Editar Registro"                        					 
+                        					    ajax="true"                        					 
+                        					    actionListener="#{consultarDespesaController.Editar(despesa)}"
+                        					    oncomplete="PF('dialog-modal-editar').show();" 
+                        					    update="dialog-modal-editar"/>
+ 
+        				 </p:column>
+ 
+        				 <p:column headerText="Excluir" style="width:25px;">
+ 
+        				    <p:commandButton icon="ui-icon-trash" 
+        				    		     title="Excluir Registro"                        					 
+                        					 ajax="true"
+                        					 actionListener="#{consultarDespesaController.Excluir(despesa)}"
+                        					 update="@form" />
+ 
+        				 </p:column>
+        				 
+        				   <p:column headerText="Pagar" style="width:25px;">
+ 
+        				    <p:commandButton icon=" ui-icon-script" 
+        				    		     title="Pagamentos"                        					 
+                        					 ajax="true"
+                        					 actionListener="#{pagarDespesaController.Editar(despesa)}"
+                        					 oncomplete="PF('dialog-modal-pagar').show();"
+                        					 update="dialog-modal-pagar" />
+                          </p:column>
+ 
+			</p:dataTable>
+			
+<!-- 			<p:panel header="Excel" style="width:50px;"> -->
+<!--             <h:commandLink> -->
+<!--                 <p:graphicImage value="/resources/imagens/ms-excel.png" width="30px" height="30px" /> -->
+<!--                 <p:dataExporter type="xls" postProcessor="#{manager.postProcessXLS}" -->
+<!--                     target="dataTable-registros" fileName="myexcel" /> -->
+<!--             </h:commandLink> -->
+<!--             <h:commandLink> -->
+<!--                 <p:graphicImage value="/resources/imagens/ms-excel.png" width="30px" height="30px"  /> -->
+<!--                 <p:dataExporter type="pdf" target="mydata" fileName="mypdf" /> -->
+<!--             </h:commandLink> -->
+<!--         </p:panel> -->
+ 
+		</h:form>
+ 
+	</ui:define>
+ 
+</ui:composition>
+</html>
