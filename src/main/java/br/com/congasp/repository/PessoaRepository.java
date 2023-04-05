@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
- 
+
+import javax.activity.InvalidActivityException;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -26,7 +27,7 @@ public class PessoaRepository {
 	 * MÉTODO RESPONSÁVEL POR SALVAR UMA NOVA PESSOA
 	 * @param pessoaModel
 	 */
-	public void SalvarNovoRegistro(PessoaModel pessoaModel){
+	public void SalvarNovoRegistro(PessoaModel pessoaModel) throws InvalidActivityException{
  
 		entityManager =  Uteis.JpaEntityManager();
  
@@ -40,9 +41,18 @@ public class PessoaRepository {
  
 		UsuarioEntity usuarioEntity = entityManager.find(UsuarioEntity.class, pessoaModel.getUsuarioModel().getCodigo()); 
  
-		pessoaEntity.setUsuarioEntity(usuarioEntity);
- 
+		pessoaEntity.setUsuarioEntity(usuarioEntity);			
+       
+	    try 
+	    {
 		entityManager.persist(pessoaEntity);
+			
+	    }
+	    catch(Exception ex)
+	    {
+	    	throw new InvalidActivityException(ex.getMessage());
+	    }
+	    
  
 	}
  

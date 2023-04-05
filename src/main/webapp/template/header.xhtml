@@ -9,7 +9,26 @@
 		    
 		    <p:menuitem value="Home" icon="ui-icon-home" url="home.xhtml" />
 		    
-		    <p:submenu label="Pessoas" icon="ui-icon-person">
+		    <p:submenu label="Usuários" icon="ui-icon-person">
+		        <p:column>
+		            <p:submenu label="Cadastrar">
+		                <p:menuitem value="Criar" url="cadastrarUsuario.xhtml" />
+<!-- 		                <p:menuitem value="TV.1.2" url="#" /> -->
+		            </p:submenu>
+		            <p:submenu label="Consultar">
+		                <p:menuitem value="Consulta" url="consultarPessoa.xhtml" />
+<!-- 		                <p:menuitem value="TV.2.2" url="#" /> -->
+<!-- 		                <p:menuitem value="TV.2.3" url="#" /> -->
+		            </p:submenu>
+		        </p:column>
+		 
+<!-- 		        <p:column> -->
+<!-- 		            <strong>Image</strong> -->
+<!-- 		            <p:graphicImage name="/demo/images/nature/nature1.jpg" width="200"/> -->
+<!-- 		        </p:column> -->
+		    </p:submenu>
+		    
+		    <p:submenu label="Pessoas" icon="ui-icon-contact">
 		        <p:column>
 		            <p:submenu label="Cadastrar">
 		                <p:menuitem value="Criar" url="cadastrarPessoa.xhtml" />

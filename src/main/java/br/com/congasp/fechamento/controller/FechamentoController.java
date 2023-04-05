@@ -210,7 +210,7 @@ public class FechamentoController implements Serializable {
              {
                  if (produtoBD.getCodClasseCusto() == "1")
                  {
-                     despesaCopia.setExercicio(FechamentoController.GetYear(novaCompetencia));
+                     despesaCopia.setExercicio(String.valueOf(FechamentoController.GetYear(novaCompetencia)));
                      despesaCopia.setMes(FechamentoController.GetMonth(novaCompetencia));
                      
                      if (despesaCopia.getMes() == 12) {
@@ -235,7 +235,7 @@ public class FechamentoController implements Serializable {
              }
              else
              {
-            	 despesaCopia.setExercicio(FechamentoController.GetYear(novaCompetencia));
+            	 despesaCopia.setExercicio(String.valueOf(FechamentoController.GetYear(novaCompetencia)));
             	 despesaCopia.setMes(FechamentoController.GetMonth(novaCompetencia));
             	 if (despesaCopia.getMes() == 12) {
                 	 despesaCopia.setMes(1);
@@ -280,13 +280,13 @@ public class FechamentoController implements Serializable {
         	 mesDespesa = FechamentoController.GetMonth(despesaCopia.getDataLimite());
         	   if (mesDespesa == 12 ) { mesDespesa = 1; } else {mesDespesa++;}
         	 
-        	   if( mesDespesa == mesInt &&  FechamentoController.GetYear(novaCompetencia) == despesaModel.getExercicio()) {
+        	   if( mesDespesa == mesInt &&  FechamentoController.GetYear(novaCompetencia) == Integer.parseInt(despesaModel.getExercicio())) {
         		   
         	  
         	     despesaNova = new DespesaModel();
         	     despesaNova.setMes(mesInt);
         	     despesaNova.setId_produto(despesaCopia.getProdutoModel().getIdProduto());
-        	     despesaNova.setExercicio(FechamentoController.GetYear(novaCompetencia));
+        	     despesaNova.setExercicio(String.valueOf(FechamentoController.GetYear(novaCompetencia)));
         	     despesaNova.setDebito_automatico("");
         	     despesaNova.setObservacao(despesaCopia.getObservacao());
         	     despesaNova.setData_despesa(despesaCopia.getDataDespesa());
@@ -307,7 +307,7 @@ public class FechamentoController implements Serializable {
          ExercicioModel conf = new ExercicioModel();
          conf.setAtivo("X");
          conf.setDataAtivacao(despesaModel.getData_limite());
-         conf.setExercicio(FechamentoController.GetYear(novaCompetencia));
+         conf.setExercicio(String.valueOf(FechamentoController.GetYear(novaCompetencia)));
          conf.setCompetencia(despesaNova.getMes());
 
          exercicioRepository.Salvar(conf);
@@ -351,13 +351,13 @@ public class FechamentoController implements Serializable {
         ExercicioModel conf = new ExercicioModel();
         conf = exercicioRepository.GetLastValidConfExercicio();
 
-        if (mesNovo < conf.getCompetencia() && FechamentoController.GetYear(novaCompetencia) == conf.getExercicio())
+        if (mesNovo < conf.getCompetencia() && (String.valueOf(FechamentoController.GetYear(novaCompetencia)) == conf.getExercicio()))
         {
         	Uteis.MensagemInfo("A competência selecionada já foi fechada!");
         	return;
         }
 
-        if (mesNovo != conf.getCompetencia() && FechamentoController.GetYear(novaCompetencia) == conf.getExercicio())
+        if (mesNovo != conf.getCompetencia() && String.valueOf(FechamentoController.GetYear(novaCompetencia)) == conf.getExercicio())
         {
         	Uteis.MensagemInfo("A competência selecionada está bloqueada no momento!");
         	return;
@@ -417,7 +417,7 @@ public class FechamentoController implements Serializable {
              ExercicioModel conf = new ExercicioModel();
              conf.setAtivo("X");
              conf.setDataAtivacao(despesaModel.getData_limite());
-             conf.setExercicio(FechamentoController.GetYear(novaCompetencia));
+             conf.setExercicio(String.valueOf(FechamentoController.GetYear(novaCompetencia)));
              conf.setCompetencia(FechamentoController.GetYear(novaCompetencia));
 
              exercicioRepository.Salvar(conf);

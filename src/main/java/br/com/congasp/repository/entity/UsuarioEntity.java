@@ -28,7 +28,16 @@ public class UsuarioEntity implements Serializable {
  
 	@Column(name="ds_senha")
 	private String senha;
+	
+	@Column(name="status")
+	private String status;
  
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getCodigo() {
 		return codigo;
 	}

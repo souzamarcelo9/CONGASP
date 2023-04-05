@@ -17,7 +17,7 @@
  
 		   <p:tabView style="width:600px;height:370px;margin:auto;">
 	 		 
-	 		 <p:tab title="Cadastro de Pessoa">
+	 		 <p:tab title="Cadastro de Usuário">
  
 	 		 	<h:form id="form-cadastro">	 	
  
@@ -29,6 +29,7 @@
 	            				  value="#{cadastrarPessoaController.pessoaModel.nome}"
 	            				  required="true"
 	            				  requiredMessage="O nome é de preenchimento obrigatório"/>
+	            				  	            	  
  
 	            		<p:outputLabel for="selectOneRadio-sexo" value="Sexo:" />
         				<p:selectOneRadio id="selectOneRadio-sexo" 
@@ -54,8 +55,8 @@
 	            			     style="width:400px" 
 	            			     maxlength="200" 
 	            			     value="#{cadastrarPessoaController.pessoaModel.endereco}"
-	            			     required="true"
-	            		             requiredMessage="O endereço é de preenchimento obrigatório"/>
+	            			     required="false"/>
+	            		             
  
 	            		<p:spacer/>
  

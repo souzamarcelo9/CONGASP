@@ -141,13 +141,13 @@ public class CadastrarDespesaFuturaController implements Serializable {
 	        ExercicioModel conf = new ExercicioModel();
 	        conf = exercicioRepository.GetLastValidConfExercicio();
 
-	        if (mesNovo <= conf.getCompetencia() && despesaModel.getExercicio() == conf.getExercicio())
+	        if (mesNovo <= conf.getCompetencia() && despesaModel.getExercicio() == Integer.parseInt(conf.getExercicio()))
 	        {
 	        	Uteis.MensagemInfo("A competência selecionada já foi fechada!");
 	        	return;
 	        }
 	        
-	        if (mesNovo <= conf.getCompetencia() && despesaModel.getExercicio() < conf.getExercicio())
+	        if (mesNovo <= conf.getCompetencia() && despesaModel.getExercicio() < Integer.parseInt(conf.getExercicio()))
 	        {
 	        	Uteis.MensagemInfo("O exercício está incorreto!");
 	        	return;

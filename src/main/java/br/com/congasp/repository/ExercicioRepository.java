@@ -31,7 +31,7 @@ public class ExercicioRepository {
 		exercicioEntity = new ExercicioEntity();
 		exercicioEntity.setAtivo("X");
 		exercicioEntity.setCompetencia(exercicioModel.getCompetencia());
-		exercicioEntity.setExercicio(exercicioModel.getExercicio());
+		exercicioEntity.setExercicio(Integer.parseInt(exercicioModel.getExercicio()));
 		exercicioEntity.setDataAtivacao(exercicioModel.getDataAtivacao());
 		
  
@@ -58,7 +58,7 @@ public class ExercicioRepository {
 		    exercicioModel.setAtivo(exercicioEntity.getAtivo());
 		    exercicioModel.setCod_exercicio(exercicioEntity.getCod_exercicio());
 		    exercicioModel.setCompetencia(exercicioEntity.getCompetencia());
-		    exercicioModel.setExercicio(exercicioEntity.getExercicio());
+		    exercicioModel.setExercicio(String.valueOf(exercicioEntity.getExercicio()));
 		    exercicioModel.setDataAtivacao(exercicioEntity.getDataAtivacao());
 		    
 			exerciciosModel.add(exercicioModel);

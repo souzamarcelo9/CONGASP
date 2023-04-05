@@ -2,6 +2,7 @@ package br.com.congasp.usuario.controller;
 
 import java.io.Serializable;
 
+import javax.activity.InvalidActivityException;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -47,7 +48,7 @@ public class UsuarioController implements Serializable {
  
 		return "/index.xhtml?faces-redirect=true";
 	}
-	public String EfetuarLogin(){
+	public String EfetuarLogin() throws InvalidActivityException{
  
 		if(StringUtils.isEmpty(usuarioModel.getUsuario()) || StringUtils.isBlank(usuarioModel.getUsuario())){
  

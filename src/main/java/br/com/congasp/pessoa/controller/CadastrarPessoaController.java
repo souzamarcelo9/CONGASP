@@ -1,6 +1,8 @@
 package br.com.congasp.pessoa.controller;
 
 import java.io.IOException;
+
+import javax.activity.InvalidActivityException;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -55,18 +57,25 @@ public class CadastrarPessoaController {
 	/**
 	 *SALVA UM NOVO REGISTRO VIA INPUT 
 	 */
-	public void SalvarNovaPessoa(){
+	public void SalvarNovaPessoa() throws InvalidActivityException{
  
 		pessoaModel.setUsuarioModel(this.usuarioController.GetUsuarioSession());
  
 		//INFORMANDO QUE O CADASTRO FOI VIA INPUT
 		pessoaModel.setOrigemCadastro("I");
- 
-		pessoaRepository.SalvarNovoRegistro(this.pessoaModel);
- 
-		this.pessoaModel = null;
- 
-		Uteis.MensagemInfo("Registro cadastrado com sucesso");
+		
+		try
+		{
+			pessoaRepository.SalvarNovoRegistro(this.pessoaModel);
+	 
+			this.pessoaModel = null;
+	 
+			Uteis.MensagemInfo("Registro cadastrado com sucesso");
+		}
+		catch(Exception ex)
+		{
+			throw new InvalidActivityException(ex.getMessage());
+		}
  
 	}
  

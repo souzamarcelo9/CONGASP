@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+ 
+<h:head>
+</h:head>
+ 
+<ui:composition template="/template/layoutBase.xhtml">
+ 
+ 
+	<ui:define name="content">
+ 
+		   <p:tabView style="width:600px;height:370px;margin:auto;">
+	 		 
+	 		 <p:tab title="Cadastro de Usuário">
+ 
+	 		 	<h:form id="form-cadastro">	 	
+ 
+	 		 	<h:panelGrid id="panelGrid-campos-form" columns="2" cellpadding="10">	 		 			
+	            				  
+	            	    <p:outputLabel value="Usuário" for="inputText-usuario"/>
+	            		<p:inputText id="inputText-usuario" 
+	            				  style="width:300px" maxlength="70" 
+	            				  value="#{cadastrarUsuarioController.usuarioModel.usuario}"
+	            				  required="true"
+	            				  requiredMessage="O usuário é de preenchimento obrigatório"/>
+	            				  
+	            	    <p:outputLabel value="Senha" for="inputText-senha"/>
+	            		<p:inputText id="inputText-senha" 
+	            			     style="width:300px" 
+	            			     maxlength="80" 
+	            			     type="password"
+	            			     value="#{cadastrarUsuarioController.usuarioModel.senha}"
+	            			     required="true"
+	            			     requiredMessage="A senha é de preenchimento obrigatório"/>  
+ 
+	            		<p:outputLabel for="selectOneRadio-status" value="Status:" />
+        				<p:selectOneRadio id="selectOneRadio-status" 
+        						  value="#{cadastrarUsuarioController.usuarioModel.status}"
+        						  required="true"
+	            				     	  requiredMessage="O status é de preenchimento obrigatório">
+ 
+            				<f:selectItem itemLabel="Ativo" itemValue="A" />
+            				<f:selectItem itemLabel="Inativo" itemValue="I" />            				
+        				</p:selectOneRadio>	            	
+	            		             
+ 
+	            		<p:spacer/>
+ 
+	            		<p:commandButton value="Salvar" 
+	            				 id="commandButton-salvar"
+						 icon="ui-icon-gear"
+						 actionListener="#{cadastrarUsuarioController.Salvar}"
+						 update="panelGrid-campos-form"/>
+ 
+ 
+	 		 	</h:panelGrid>
+ 
+	 		 		<p:messages showDetail="true" autoUpdate="true" closable="true" severity="warn"/>
+	 		 		<p:messages autoUpdate="true" closable="true" severity="error"/>		
+		   			<p:messages showDetail="true" autoUpdate="true" closable="true" severity="info"/>
+ 
+	 		 		</h:form>
+ 
+	 			</p:tab>
+	 			
+<!-- 	 			<p:tab title="Upload Xml Pessoa"> -->
+ 
+<!-- 				   <h:form id="form-upload" enctype="multipart/form-data"> -->
+				 
+<!-- 				      <h:panelGrid id="panelGrid-upload-xml" columns="2" cellpadding="10"> -->
+				 
+<!-- 					<p:fileUpload value="#{cadastrarPessoaController.file}"  -->
+<!-- 						      mode="simple"  -->
+<!-- 						      skinSimple="true"  -->
+<!-- 						      label="Selecionar"/> -->
+				 
+<!-- 					<p:commandButton value="Importar..."  -->
+<!-- 						 	 ajax="false" -->
+<!-- 						 	 actionListener="#{cadastrarPessoaController.UploadRegistros}"/> -->
+				 
+<!-- 				     </h:panelGrid> -->
+				 
+<!-- 				   </h:form>	 			 		 -->
+<!-- 				</p:tab>		 		 -->
+ 
+	 		</p:tabView>
+ 
+ 
+	</ui:define>
+ 
+</ui:composition>
+ 
+ 
+</html>
